@@ -2,99 +2,94 @@
 
    infix
       year     1 - 20
-      conrinc  21 - 40
-      cohort   41 - 60
-      ballot   61 - 80
-      wtssall  81 - 100
-      income   101 - 120
-      finrela  121 - 140
-      realinc  141 - 160
-      sex      161 - 180
-      homosex  181 - 200
-      hispanic 201 - 220
-      rowngun  221 - 240
-      owngun   241 - 260
-      id_      261 - 280
-      age      281 - 300
-      race     301 - 320
-      srcbelt  321 - 340
-      polviews 341 - 360
-      natcrime 361 - 380
-      gunlaw   381 - 400
-      gun      401 - 420
-      gunage   421 - 440
-      gunnum   441 - 460
-      educ     461 - 480
+      gunage   21 - 40
+      gunnum   41 - 60
+      owngun   61 - 80
+      rowngun  81 - 100
+      realinc  101 - 120
+      conrinc  121 - 140
+      hispanic 141 - 160
+      cohort   161 - 180
+      ballot   181 - 200
+      wtssall  201 - 220
+      gun      221 - 240
+      gunlaw   241 - 260
+      cappun   261 - 280
+      id_      281 - 300
+      age      301 - 320
+      educ     321 - 340
+      sex      341 - 360
+      race     361 - 380
+      income   381 - 400
+      rincome  401 - 420
+      srcbelt  421 - 440
+      polviews 441 - 460
+      natcrime 461 - 480
+      adults   481 - 500
 using GSS.dat;
 
 label variable year     "Gss year for this respondent                       ";
+label variable gunage   "Threatened or shot at as child or adult";
+label variable gunnum   "If threatened or shot at--how many times";
+label variable owngun   "Have gun in home";
+label variable rowngun  "Does gun belong to r";
+label variable realinc  "Family income in constant $";
 label variable conrinc  "Respondent income in constant dollars";
+label variable hispanic "Hispanic specified";
 label variable cohort   "Year of birth";
 label variable ballot   "Ballot used for interview";
 label variable wtssall  "Weight variable";
-label variable income   "Total family income";
-label variable finrela  "Opinion of family income";
-label variable realinc  "Family income in constant $";
-label variable sex      "Respondents sex";
-label variable homosex  "Homosexual sex relations";
-label variable hispanic "Hispanic specified";
-label variable rowngun  "Does gun belong to r";
-label variable owngun   "Have gun in home";
+label variable gun      "Ever threatened with gun or shot at";
+label variable gunlaw   "Favor or oppose gun permits";
+label variable cappun   "Favor or oppose death penalty for murder";
 label variable id_      "Respondent id number";
 label variable age      "Age of respondent";
+label variable educ     "Highest year of school completed";
+label variable sex      "Respondents sex";
 label variable race     "Race of respondent";
+label variable income   "Total family income";
+label variable rincome  "Respondents income";
 label variable srcbelt  "Src beltcode";
 label variable polviews "Think of self as liberal or conservative";
 label variable natcrime "Halting rising crime rate";
-label variable gunlaw   "Favor or oppose gun permits";
-label variable gun      "Ever threatened with gun or shot at";
-label variable gunage   "Threatened or shot at as child or adult";
-label variable gunnum   "If threatened or shot at--how many times";
-label variable educ     "Highest year of school completed";
+label variable adults   "Household members 18 yrs and older";
 
 
 label define gsp001x
-   999999   "No answer"
-   999998   "Dont know"
+   9        "No answer"
+   8        "Don't know"
+   3        "Both"
+   2        "Adult"
+   1        "Child"
    0        "Not applicable"
 ;
 label define gsp002x
-   9999     "No answer"
+   9        "No answer"
+   8        "Not sure"
+   3        "4+ times"
+   2        "2-3 times"
+   1        "Once"
    0        "Not applicable"
 ;
 label define gsp003x
-   4        "Ballot d"
-   3        "Ballot c"
-   2        "Ballot b"
-   1        "Ballot a"
+   9        "No answer"
+   8        "Don't know"
+   3        "Refused"
+   2        "No"
+   1        "Yes"
    0        "Not applicable"
 ;
 label define gsp004x
-   99       "No answer"
-   98       "Don't know"
-   13       "Refused"
-   12       "$25000 or more"
-   11       "$20000 - 24999"
-   10       "$15000 - 19999"
-   9        "$10000 - 14999"
-   8        "$8000 to 9999"
-   7        "$7000 to 7999"
-   6        "$6000 to 6999"
-   5        "$5000 to 5999"
-   4        "$4000 to 4999"
-   3        "$3000 to 3999"
-   2        "$1000 to 2999"
-   1        "Lt $1000"
+   9        "No answer"
+   8        "Don't know"
+   3        "Refused"
+   2        "No"
+   1        "Yes"
    0        "Not applicable"
 ;
 label define gsp005x
-   9        "No answer"
-   8        "Don't know"
-   5        "Far above average"
-   4        "Above average"
-   3        "Average"
-   2        "Below average"
-   1        "Far below average"
+   999999   "No answer"
+   999998   "Dont know"
    0        "Not applicable"
 ;
 label define gsp006x
@@ -103,20 +98,6 @@ label define gsp006x
    0        "Not applicable"
 ;
 label define gsp007x
-   2        "Female"
-   1        "Male"
-;
-label define gsp008x
-   9        "No answer"
-   8        "Don't know"
-   5        "Other"
-   4        "Not wrong at all"
-   3        "Sometimes wrong"
-   2        "Almst always wrg"
-   1        "Always wrong"
-   0        "Not applicable"
-;
-label define gsp009x
    99       "No answer"
    98       "Don't know"
    50       "Other, not specified"
@@ -149,10 +130,20 @@ label define gsp009x
    1        "Not hispanic"
    0        "Not applicable"
 ;
+label define gsp008x
+   9999     "No answer"
+   0        "Not applicable"
+;
+label define gsp009x
+   4        "Ballot d"
+   3        "Ballot c"
+   2        "Ballot b"
+   1        "Ballot a"
+   0        "Not applicable"
+;
 label define gsp010x
    9        "No answer"
    8        "Don't know"
-   3        "Refused"
    2        "No"
    1        "Yes"
    0        "Not applicable"
@@ -160,23 +151,74 @@ label define gsp010x
 label define gsp011x
    9        "No answer"
    8        "Don't know"
-   3        "Refused"
-   2        "No"
-   1        "Yes"
+   2        "Oppose"
+   1        "Favor"
    0        "Not applicable"
 ;
 label define gsp012x
+   9        "No answer"
+   8        "Don't know"
+   2        "Oppose"
+   1        "Favor"
+   0        "Not applicable"
+;
+label define gsp013x
    99       "No answer"
    98       "Don't know"
    89       "89 or older"
 ;
-label define gsp013x
+label define gsp014x
+   99       "No answer"
+   98       "Don't know"
+   97       "Not applicable"
+;
+label define gsp015x
+   2        "Female"
+   1        "Male"
+;
+label define gsp016x
    3        "Other"
    2        "Black"
    1        "White"
    0        "Not applicable"
 ;
-label define gsp014x
+label define gsp017x
+   99       "No answer"
+   98       "Don't know"
+   13       "Refused"
+   12       "$25000 or more"
+   11       "$20000 - 24999"
+   10       "$15000 - 19999"
+   9        "$10000 - 14999"
+   8        "$8000 to 9999"
+   7        "$7000 to 7999"
+   6        "$6000 to 6999"
+   5        "$5000 to 5999"
+   4        "$4000 to 4999"
+   3        "$3000 to 3999"
+   2        "$1000 to 2999"
+   1        "Lt $1000"
+   0        "Not applicable"
+;
+label define gsp018x
+   99       "No answer"
+   98       "Don't know"
+   13       "Refused"
+   12       "$25000 or more"
+   11       "$20000 - 24999"
+   10       "$15000 - 19999"
+   9        "$10000 - 14999"
+   8        "$8000 to 9999"
+   7        "$7000 to 7999"
+   6        "$6000 to 6999"
+   5        "$5000 to 5999"
+   4        "$4000 to 4999"
+   3        "$3000 to 3999"
+   2        "$1000 to 2999"
+   1        "Lt $1000"
+   0        "Not applicable"
+;
+label define gsp019x
    6        "Other rural"
    5        "Other urban"
    4        "Suburb, 13-100"
@@ -185,7 +227,7 @@ label define gsp014x
    1        "12 lrgst smsa's"
    0        "Not assigned"
 ;
-label define gsp015x
+label define gsp020x
    9        "No answer"
    8        "Don't know"
    7        "Extrmly conservative"
@@ -197,7 +239,7 @@ label define gsp015x
    1        "Extremely liberal"
    0        "Not applicable"
 ;
-label define gsp016x
+label define gsp021x
    9        "No answer"
    8        "Don't know"
    3        "Too much"
@@ -205,63 +247,33 @@ label define gsp016x
    1        "Too little"
    0        "Not applicable"
 ;
-label define gsp017x
+label define gsp022x
    9        "No answer"
-   8        "Don't know"
-   2        "Oppose"
-   1        "Favor"
-   0        "Not applicable"
-;
-label define gsp018x
-   9        "No answer"
-   8        "Don't know"
-   2        "No"
-   1        "Yes"
-   0        "Not applicable"
-;
-label define gsp019x
-   9        "No answer"
-   8        "Don't know"
-   3        "Both"
-   2        "Adult"
-   1        "Child"
-   0        "Not applicable"
-;
-label define gsp020x
-   9        "No answer"
-   8        "Not sure"
-   3        "4+ times"
-   2        "2-3 times"
-   1        "Once"
-   0        "Not applicable"
-;
-label define gsp021x
-   99       "No answer"
-   98       "Don't know"
-   97       "Not applicable"
+   8        "8 or more"
 ;
 
 
-label values conrinc  gsp001x;
-label values cohort   gsp002x;
-label values ballot   gsp003x;
-label values income   gsp004x;
-label values finrela  gsp005x;
-label values realinc  gsp006x;
-label values sex      gsp007x;
-label values homosex  gsp008x;
-label values hispanic gsp009x;
-label values rowngun  gsp010x;
-label values owngun   gsp011x;
-label values age      gsp012x;
-label values race     gsp013x;
-label values srcbelt  gsp014x;
-label values polviews gsp015x;
-label values natcrime gsp016x;
-label values gunlaw   gsp017x;
-label values gun      gsp018x;
-label values gunage   gsp019x;
-label values gunnum   gsp020x;
-label values educ     gsp021x;
+label values gunage   gsp001x;
+label values gunnum   gsp002x;
+label values owngun   gsp003x;
+label values rowngun  gsp004x;
+label values realinc  gsp005x;
+label values conrinc  gsp006x;
+label values hispanic gsp007x;
+label values cohort   gsp008x;
+label values ballot   gsp009x;
+label values gun      gsp010x;
+label values gunlaw   gsp011x;
+label values cappun   gsp012x;
+label values age      gsp013x;
+label values educ     gsp014x;
+label values sex      gsp015x;
+label values race     gsp016x;
+label values income   gsp017x;
+label values rincome  gsp018x;
+label values srcbelt  gsp019x;
+label values polviews gsp020x;
+label values natcrime gsp021x;
+label values adults   gsp022x;
 
 
