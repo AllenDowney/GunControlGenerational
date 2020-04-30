@@ -1,1 +1,1 @@
-This is a read me file
+This directory have images which kind of show the preview of visuals which are made from different datasets
